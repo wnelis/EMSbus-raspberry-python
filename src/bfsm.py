@@ -12,11 +12,11 @@
 # next stimulus. Some internal stimuli are in fact modifiers on the stimulus
 # being handled: these are passed via the high-priority queue.
 #
-#  In addition to event actions, there are state actions. A state action depends
-#  only on the state. These are performed after entering a state and just before
-#  the event action is performed. If a state action returns a True value, the
-#  event action will be invoked too, but if it returns a False value, the event
-#  action will be skipped.
+# In addition to event actions, there are state actions. A state action depends
+# only on the state. These are performed after entering a state and just before
+# the event action is performed. If a state action returns a True value, the
+# event action will be invoked too, but if it returns a False value, the event
+# action will be skipped.
 #
 # For convenience a single watchdog-timer, named wdt, is created together with
 # the FSM. It is not used within this class.
