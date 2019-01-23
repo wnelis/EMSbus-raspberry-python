@@ -12,24 +12,16 @@
 # next stimulus. Some internal stimuli are in fact modifiers on the stimulus
 # being handled: these are passed via the high-priority queue.
 #
-# Version 0.00, W.J.M. Nelis, wim.nelis@ziggo.nl, 2018.01
+#  In addition to event actions, there are state actions. A state action depends
+#  only on the state. These are performed after entering a state and just before
+#  the event action is performed. If a state action returns a True value, the
+#  event action will be invoked too, but if it returns a False value, the event
+#  action will be skipped.
 #
-# Version 0.01, W.J.M. Nelis, wim.nelis@ziggo.nl, 2018.12
-# - Stop experiment with asyncio. This implies that the FSM is no longer a long
-#   running thread, which blocks untill a stimulus arrives, but becomes a
-#   function which is invoked to handle one or a few stimuli. It returns control
-#   to the caller once done.
-# - Build the list of states and the list of stimuli from the matrix.
-# - Add comment sections.
+# For convenience a single watchdog-timer, named wdt, is created together with
+# the FSM. It is not used within this class.
 #
-# Version 0.02, W.J.M. nelis, wim.nelis@ziggo.nl, 2019.01
-# - Add state actions in addition to the event actions. A state action depends
-#   only on the state. These are performed after entering a state and just
-#   before the event action is performed. If a state action returns a True
-#   value, the event action will be invoked too, but if it returns a False
-#   value, the event action will be skipped.
-# - For convenience a single watchdog-timer, named wdt, is created together with
-#   the FSM. It is not used within this class.
+# Written by W.J.M. Nelis, wim.nelis@ziggo.nl, 2018.01
 #
 import queue
 import time
