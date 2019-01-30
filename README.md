@@ -2,7 +2,9 @@
 
 ### Introduction.
 
-A number of boiler brands, for instance Nefit and Buderus, use a two-wire connection for communication between the various devices in the heating system, the EMS-bus. EMS stands for "Energy Management System". The intention of this project is to monitor the status and the performance of devices attached to the EMS-bus, typically a boiler and a thermostat, and to have the ability to control the heating system via EMS-bus as well. This project is designed to utilize a Raspberry Pi, running raspbian, and is programmed in Python3. It uses Xymon as the reporting tool.
+A number of boiler brands, for instance Nefit and Buderus, use a two-wire connection for communication between the various devices in the heating system, the EMS-bus. EMS stands for "Energy Management System". The intention of this project is to monitor the status and the performance of devices attached to the EMS-bus, typically a boiler and a thermostat, and to have the ability to control the heating system via EMS-bus as well. The design goals for this project are (a) to utilize a Raspberry Pi, running raspbian, and (b) to program as much as possible in Python3. It uses Xymon as the reporting tool.
+
+For this project a lot of information about the (proprietary) EMS-bus is found on various websites. The site [https://github.com/bbqkees/EMS-Wiki] tries to give an overview of the available documentation.
 
 ### Software modules.
 
