@@ -39,14 +39,21 @@ skipped by returning a False value.
 Module emsvar.py contains class definitions for the various types of variables
 to be found in the messages exchanged on the EMS-bus. Currently the following
 classes are defined:
+<br>
  . ems_ascii    : a string of one of more octets containing ASCII characters
+<br>
  . ems_datetime : a set of 6 octets containing a time stamp
+<br>
  . ems_flag     : a field of one bit
+<br>
  . ems_numeric  : a field which contains a two's complement number, which is
                   either integer (no divisor) or floating point (divisor != 1)
+<br>
  . ems_sumima   : a numeric field with a high update frequency. This class
                   maintains the minimum, maximum and average value.
+<br>
  . ems_switch   : an ems_flag class, with values 'On' or 'Off'
+<br>
  . ems_version  : a set of two octets containing the major an minor version numbers
- 
+<br>
  
