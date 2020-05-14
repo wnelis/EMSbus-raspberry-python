@@ -50,4 +50,6 @@ classes are defined:
  <tr> <td>ems_switch</td> <td>an ems_flag class, with values 'On' or 'Off'</td> </tr>
  <tr> <td>ems_version</td> <td>a set of two octets containing the major and minor version numbers</td> </tr>
 </table>
- 
+
+Repeating fields and repeating structures are not implemented (yet).
+
