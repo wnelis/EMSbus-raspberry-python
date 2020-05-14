@@ -36,6 +36,7 @@ import syslog				# Syslog access
 import termios				# POSIX style tty control
 import threading			# Run program sections concurrently
 import time
+import types				# Map function onto bound method
 import watchdog				# Resettable watchdog timer
 
 #
@@ -113,7 +114,26 @@ class Emsbus():
     self.device= device			# Save my EMS bus device id
     self.mode  = mode			# Save mode: monitor, participate or mixed
     self.name  = 'bus'			# Name to use in syslog messages
-
+  #
+  # Change the type of the actions from 'function reference' to 'bound method
+  # reference'. Then the 'self' parameter will be added automatically, giving
+  # the action methods access to the instance variables.
+  #
+    for mode in Emsbus.FSMDT:
+      for gress in Emsbus.FSMDT[mode]:
+        for state in Emsbus.FSMDT[mode][gress]:
+          for stim in Emsbus.FSMDT[mode][gress][state]:
+            Emsbus.FSMDT[mode][gress][state][stim]= (
+              Emsbus.FSMDT[mode][gress][state][stim][0],	# Do not change
+              types.MethodType(Emsbus.FSMDT[mode][gress][state][stim][1],self) )
+  #
+    for mode in Emsbus.FSMSA:
+      for gress in Emsbus.FSMSA[mode]:
+        for state in Emsbus.FSMSA[mode][gress]:
+          if Emsbus.FSMSA[mode][gress][state] is None:
+            continue
+          Emsbus.FSMSA[mode][gress][state]= types.MethodType(Emsbus.FSMSA[mode][gress][state],self)
+  #
     self.serial= None			# Serial port object instance
 
     self.reader_thread= None		# Ingress variables
@@ -135,7 +155,7 @@ class Emsbus():
     self.idisp_queue  = queue.Queue()
     self.idisp_frame  = None
     self.idisp_fsm    = bfsm.Bfsm( Emsbus.FSMDT[self.mode]['ingress'],
-      Emsbus.FSMSA[self.mode]['ingress'] )
+                                   Emsbus.FSMSA[self.mode]['ingress'] )
     self.idisp_fsm_wdt= watchdog.WatchdogTimer()
     self.idisp_log    = None		# Call back for logging a frame
     self.idisp_log_slf= None		# Object instance to be used for logging
@@ -147,7 +167,7 @@ class Emsbus():
     self.edisp_frame  = bytearray()
     self.edisp_type   = None
     self.edisp_fsm    = bfsm.Bfsm( Emsbus.FSMDT[self.mode]['egress'],
-      Emsbus.FSMSA[self.mode]['egress'] )
+                                   Emsbus.FSMSA[self.mode]['egress'] )
     self.edisp_fsm_wdt= watchdog.WatchdogTimer()
 
   # Preset the SME-bus statistics.
