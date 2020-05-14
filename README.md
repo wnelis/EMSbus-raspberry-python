@@ -53,3 +53,21 @@ classes are defined:
 
 Repeating fields and repeating structures are not implemented (yet).
 
+#### emsbus.py
+
+Module emsbus.py defines methods to read frames from and write frames to the
+half-duplex EMS-bus. It takes care of the synchronisation issues. It validates
+the check-sum upon receipt of a frame and adds a check-sum prior to sending a
+frame. Additionally, it collects information about the performance
+characteristics of the EMS-bus.
+
+This module defines two modes of operation, monitor and participate. In the
+former mode all frames are read and passed on, irrespective of the destination
+address. Output to the bus is silently ignored. In the participate mode only
+frames addressed to this device are passed on, including broadcasts. If a poll
+request is received, any frames queued for transmission are sent.
+
+This module has been used in monitor mode for more then a year. The participate
+mode is hardly tested. A better method to (read and) write break signals on the
+EMS-bus is needed, and perhaps required, in order to use the participate mode.
+
