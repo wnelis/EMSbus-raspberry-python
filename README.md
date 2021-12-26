@@ -31,8 +31,7 @@ Class bfsm in module bfsm.py requires a fully populated matrix specifying for
 each state and each event (stimulus) the event-action to take and the new state.
 Optionally, a vector can be specified, which defines the state-action to perform
 just prior to the execution of the event-action. The state-action might change
-the event-queue and it might force the currently scheduled event-action to be
-skipped by returning a False value.
+the event-queue.
 
 #### emsvar.py
 
